@@ -1,12 +1,20 @@
 import * as React from 'react';
+import  styled  from 'styled-components';
+import  MainLogo  from '../components/MainLogo';
+import { useNavigate } from 'react-router';
 
-export interface IAppProps {
-}
+
 
 export default function Home () {
+  const navigate=useNavigate()
+  const Logoimg="/assets/Riot_Logo.png";
   return (
-    <div>
-      
-    </div>
+    <HomeDiv>
+      <MainLogo src={Logoimg}/>
+    </HomeDiv>
   );
 }
+const HomeDiv=styled.div`
+  display:flex;
+  justify-content: center;
+`
