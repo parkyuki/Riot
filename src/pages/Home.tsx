@@ -1,6 +1,7 @@
 import * as React from 'react';
 import  styled  from 'styled-components';
 import  MainLogo  from '../components/MainLogo';
+import Search from '../components/Search';
 import { useNavigate } from 'react-router';
 
 
@@ -11,10 +12,10 @@ export default function Home () {
   return (
     <HomeDiv>
       <MainLogo src={Logoimg}/>
+      <Search/>
     </HomeDiv>
   );
 }
 const HomeDiv=styled.div`
-  display:flex;
-  justify-content: center;
-`
+    margin-top: 10%;
+` 
