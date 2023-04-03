@@ -15,7 +15,8 @@ export default function MainLogo ({src}: MainLogoProps) {
   );
 }
 const Logo=styled.img`
-width: 60%;
-border: 9px solid #e7e6e2;
-margin-top: 2%;
+    display: block;
+    width: 60%;
+    border: 9px solid rgb(231, 230, 226);
+    margin: 2% auto 8%;
 `
