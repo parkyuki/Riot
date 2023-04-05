@@ -9,7 +9,6 @@ import Search from '../components/Search';
 
 export default function Home () {
   const [userName, setUserName]=useState<string>('')
-  const [isEmpty,setIsEmpty]=useState<boolean>(false);
   const handleSubmit=(text:string)=>{
     setUserName(text);
     console.log(userName);
@@ -19,7 +18,7 @@ export default function Home () {
   return (
     <HomeDiv>
       <MainLogo src={Logoimg}/>
-      <Search onSubmit={handleSubmit} isEmpty={isEmpty}/>
+      <Search onSubmit={handleSubmit}/>
     </HomeDiv>
   );
 }

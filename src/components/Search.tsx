@@ -5,26 +5,21 @@ import styled from 'styled-components';
 
 export interface SubmitType {
   onSubmit:(text:string)=>void
-  isEmpty:boolean
 }
 
-export default function Search ({onSubmit,isEmpty}: SubmitType) {
+export default function Search ({onSubmit}: SubmitType) {
   const [text,setText]=useState<string>('')
   const navigate=useNavigate()
 
-  // useEffect(() => {
-  //   if (text !== '') {
-  //     onSubmit(text);
-  //   }
-  // }, [text, onSubmit]);
+  useEffect(() => {
+    if (text !== '') {
+      onSubmit(text);
+    }
+  }, [text, onSubmit]);
 
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    if(text !== ''){
-      isEmpty=true;
-      onSubmit(text);
-    }
-    console.log('onSubmit'+text)
+    
  }
 
   const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
