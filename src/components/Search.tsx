@@ -1,15 +1,37 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
-export interface IAppProps {
+export interface SubmitType {
+  onSubmit:(text:string)=>void
 }
 
-export default function Search (props: IAppProps) {
- 
+export default function Search ({onSubmit}: SubmitType) {
+  const [text,setText]=useState<string>('')
+  const navigate=useNavigate()
+
+  useEffect(() => {
+    if (text !== '') {
+      onSubmit(text);
+    }
+  }, [onSubmit]);
+
+  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    
+ }
+
+  const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    setText(e.target.value);
+  }
+
+
   return (
-      <SearchBar>
-        <SearchInput type="text" placeholder='소환사 이름'/>
-        <SearchButton>Search</SearchButton>
+      <SearchBar onSubmit={handleSubmit}>
+        <SearchInput type="text" value={text}
+        onChange={handleChange} placeholder='소환사 이름'/>
+        <SearchButton type='submit'>Search</SearchButton>
       </SearchBar>
   );
 }
