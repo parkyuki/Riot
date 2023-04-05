@@ -15,7 +15,7 @@ export default function Search ({onSubmit}: SubmitType) {
     if (text !== '') {
       onSubmit(text);
     }
-  }, [onSubmit]);
+  }, [text, onSubmit]);
 
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
