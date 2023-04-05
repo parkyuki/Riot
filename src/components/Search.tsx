@@ -1,25 +1,23 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { RiotContext } from '../App';
 
-export interface SubmitType {
-  onSubmit:(text:string)=>void
-}
 
-export default function Search ({onSubmit}: SubmitType) {
+export default function Search () {
+  const {handleUserName,searchUserName}=useContext(RiotContext)
   const [text,setText]=useState<string>('')
-  const navigate=useNavigate()
+
 
   useEffect(() => {
     if (text !== '') {
-      onSubmit(text);
+      handleUserName(text);
     }
-  }, [text, onSubmit]);
+  }, [text, handleUserName]);
 
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    
+    searchUserName(true);
  }
 
   const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
