@@ -32,18 +32,20 @@ function App() {
   }
 
   const api_key="RGAPI-1d9b6f52-ea6c-4b0b-8a3f-b9a6e7ee8da0"
-  	const url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/mtrigger?api_key='+api_key
+  const url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/mtrigger?api_key='+api_key
   const [data, setData] = useState({});
   	
 
  	useEffect(()=>{
     if(searchClick){
-      fetchData(url).then(res => setData(res));
+      fetchData(url).then(res => setData(res.data));
     }
   } , [searchClick]);
 
 
- 
+   useEffect(()=>{
+    console.log(data)
+   },[data])
 
   // axios.get(url)
   // .then(response => {
