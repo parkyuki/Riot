@@ -14,58 +14,66 @@ export const RiotContext=React.createContext<ContextType>({
   searchUserName:()=>{}
 });
 
-const fetchData = async (url: string): Promise<AxiosResponse<{}>> => {
-  const res = await axios.get(url);
-  return res;
-}
-
 function App() {
   const [userName, setUserName]=useState<string>('')
   const [searchClick, setSearchClick] = useState<boolean>(false);
-
-
+  const [data, setData] = useState({});
+  const [id, setId] = useState('');
+  const [error, setError] = useState('');
+  
   const handleUserName=(text:string)=>{
     setUserName(text);
   }
   const searchUserName=(click:boolean)=>{
-    setSearchClick(click)
+    setSearchClick(click) 
   }
 
-  const api_key="RGAPI-1d9b6f52-ea6c-4b0b-8a3f-b9a6e7ee8da0"
-  const url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/mtrigger?api_key='+api_key
-  const [data, setData] = useState({});
-  	
+  const api_key="RGAPI-a734d237-c3fb-48ef-b016-ce2ae2e4d7c1"
+  const id_Url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+userName+'?api_key='+api_key
+  const user_url='https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/'+id+'?api_key='+api_key
+  const champ_url='https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/'+id+'?api_key='+api_key
 
- 	useEffect(()=>{
-    if(searchClick){
-      fetchData(url).then(res => setData(res.data));
+  useEffect(() => {
+    if (searchClick) {
+      const idfetchData = async () => {
+        try {
+          const res = await axios.get(id_Url);
+          setId(res.data.id);
+        } catch (error) {
+          setError("API 요청에 실패했습니다.");
+          alert(error); 
+        }
+      }; 
+      idfetchData();
+      setSearchClick(false);
+    } 
+  }, [searchClick]);  
+  
+  useEffect(() => {
+    if (id) {
+      const fetchData = async () => {
+        const userRes = await axios.get(user_url);
+        const champRes = await axios.get(champ_url);
+        const { tier, rank, leaguePoints, wins, losses } = userRes.data[0];
+        const championIds = champRes.data.map(({championId}:{championId: number}) => championId).slice(0, 5);
+        setData({ tier, rank, leaguePoints, wins, losses, championIds });
+      };
+      fetchData();
     }
-  } , [searchClick]);
+  }, [id]);
+  
 
 
-   useEffect(()=>{
-    console.log(data)
-   },[data])
-
-  // axios.get(url)
-  // .then(response => {
-  //   console.log(response.data);
-  // })
-  // .catch(error => {
-  //   console.log(error);
-  // });
- 
-  // console.log(data)
   return (
     <RiotContext.Provider value={{handleUserName,searchUserName}}>
-    <BrowserRouter>
-    <GlobalStyles /> 
-    <div className="App">
-     <Routes>
-        <Route path='/' element={<Home />}/>
-     </Routes>
-    </div>
-    </BrowserRouter>
+      <BrowserRouter>
+        <GlobalStyles /> 
+         <div className="App">
+           <Routes>
+             <Route path='/' element={<Home />}/>
+           </Routes>
+         </div>
+      </BrowserRouter>
     </RiotContext.Provider>
   );
 }
