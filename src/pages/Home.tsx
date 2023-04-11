@@ -8,11 +8,11 @@ import Search from '../components/Search';
 
 export default function Home () {
   
-  const Logoimg="/assets/Riot_Logo.png";
+  
 
   return (
     <HomeDiv>
-      <MainLogo src={Logoimg}/>
+      <MainLogo/>
       <Search/>
     </HomeDiv>
   );

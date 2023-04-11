@@ -1,16 +1,15 @@
 import * as React from 'react';
 import  styled  from 'styled-components';
 
-interface MainLogoProps {
-    src: string;
-  }
 
 
-export default function MainLogo ({src}: MainLogoProps) {
+export default function MainLogo () {
+  const publicUrl = process.env.PUBLIC_URL || "";
+  const Logoimg=publicUrl+"/assets/Riot_Logo.png";
     
   return (
     <>
-      <Logo src={src}/>
+      <Logo src={Logoimg}/>
     </>
   );
 }

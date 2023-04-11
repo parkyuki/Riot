@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { RiotContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Search () {
   const {handleUserName,searchUserName}=useContext(RiotContext)
   const [text,setText]=useState<string>('')
-
+  const navigate=useNavigate();
 
   useEffect(() => {
     if (text !== '') {
@@ -18,6 +19,7 @@ export default function Search () {
   const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     searchUserName(true);
+    navigate('/user')
  }
 
   const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
