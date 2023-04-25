@@ -44,7 +44,6 @@ function App() {
   const [error, setError] = useState('');
 
 
-  
   const handleUserName=(text:string)=>{
     setUserName(text);
   }
@@ -52,7 +51,7 @@ function App() {
     setSearchClick(click) 
   }
 
-  const api_key="RGAPI-a81105da-4a06-4e0f-a2fa-e7251441b960"
+  const api_key="RGAPI-d1661063-99a1-4fd8-bbac-60bd07a42bcd"
   const id_Url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+userName+'?api_key='+api_key
   const user_url='https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/'+id+'?api_key='+api_key
   const champ_url='https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/'+id+'?api_key='+api_key
@@ -90,17 +89,17 @@ function App() {
 
   return (
     <RiotContext.Provider value={{handleUserName,searchUserName}}>
-    <RiotDataContext.Provider value={data}>
-    <BrowserRouter>
-        <GlobalStyles /> 
-         <div className="App">
-           <Routes>
-             <Route path='/' element={<Home />}/>
-             <Route path='/user' element={<User />}/>
-           </Routes>
-         </div>
-      </BrowserRouter>
-    </RiotDataContext.Provider>
+      <RiotDataContext.Provider value={data}>
+        <BrowserRouter >
+          <GlobalStyles /> 
+             <div className="App">
+              <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/user" element={<User />}/>
+              </Routes>
+             </div>
+          </BrowserRouter>
+      </RiotDataContext.Provider>
     </RiotContext.Provider>
   );
 }

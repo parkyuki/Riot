@@ -12,6 +12,7 @@ export default function User () {
     const publicUrl = process.env.PUBLIC_URL || "";
     const Tierimg=publicUrl+`/assets/${userData.tier}.png`;
 
+
     const WinPercentage=Math.round(userData.wins/(userData.wins+userData.losses)*100);
 
 
@@ -35,6 +36,7 @@ export default function User () {
               tempChampionData[key] = { name, key };
             });
             setChampionData(tempChampionData);
+    
           });
       }, []);
 
@@ -48,25 +50,30 @@ export default function User () {
       <UserBody>
         <TierImg src={Tierimg}/>
         <UserTier>
-             {userData.tier} {userData.rank} {userData.leaguePoints}LP
-        <UserName>{userData.summonerName}</UserName>
+             {userData.tier} {userData.rank} {userData.leaguePoints}LP 
+        <UserName>{userData.summonerName}</UserName> 
         </UserTier>
         <Winning>{userData.wins}승 {userData.losses}패 {WinPercentage}%</Winning>
-        <>
-        {championNames.map((name) => (
-            <ChampionName key={name}>{name}</ChampionName>
-          ))}
-        </>
       </UserBody>
+      <Champion>
+        <ChampionTitle>숙련도 TOP5</ChampionTitle>
+         {championNames.map((name,index) => (
+            <ChampionIcon>
+            <ChampionImg key={index} src={publicUrl+`/champion_profile/${name}.jpg`} />
+            <ChampionName key={name}>{name}</ChampionName>
+            </ChampionIcon>
+          ))}
+      </Champion>
     </>
   );
 }
 
 const UserBody=styled.div`
-    display:flex;
-    margin-top:10%;
+    display: flex;
+    margin-top: 10%;
     width: 500px;
     border: 1px solid white;
+    padding: 10px 5px;
     flex-wrap: wrap;
 `
 
@@ -85,8 +92,31 @@ const UserTier=styled.div`
 `
 
 const Winning=styled.div`
+    padding-left:10px;
 
 `
+const Champion=styled.div`
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    margin-top:40px;
+`
+const ChampionTitle=styled.div`
+    font-size: 17px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+`
+const ChampionIcon=styled.div`
+    display:flex;
+    flex-direction: column;
+`
 const ChampionName=styled.div`
+    text-align: center;
 
+`
+const ChampionImg=styled.img`
+    width: 80px;
+    height: 80px;
+    border-radius: 40%;
 `
