@@ -1,15 +1,37 @@
 import * as React from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { RiotContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
-export interface IAppProps {
-}
 
-export default function Search (props: IAppProps) {
- 
+export default function Search () {
+  const {handleUserName,searchUserName}=useContext(RiotContext)
+  const [text,setText]=useState<string>('')
+  const navigate=useNavigate();
+
+  useEffect(() => {
+    if (text !== '') {
+      handleUserName(text);
+    }
+  }, [text, handleUserName]);
+
+  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    searchUserName(true);
+    navigate('/user')
+ }
+
+  const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    setText(e.target.value);
+  }
+
+
   return (
-      <SearchBar>
-        <SearchInput type="text" placeholder='소환사 이름'/>
-        <SearchButton>Search</SearchButton>
+      <SearchBar onSubmit={handleSubmit}>
+        <SearchInput type="text" value={text}
+        onChange={handleChange} placeholder='소환사 이름'/>
+        <SearchButton type='submit'>Search</SearchButton>
       </SearchBar>
   );
 }
