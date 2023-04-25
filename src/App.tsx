@@ -1,6 +1,6 @@
 import React, { useState,useEffect, createContext } from 'react';
 import { GlobalStyles } from './index'
-import { BrowserRouter,Routes,Route, useNavigate } from "react-router-dom";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Home from "./pages/Home";
 import axios from 'axios';
 import User from './pages/User';
