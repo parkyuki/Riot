@@ -51,7 +51,7 @@ function App() {
     setSearchClick(click) 
   }
 
-  const api_key="RGAPI-d1661063-99a1-4fd8-bbac-60bd07a42bcd"
+  const api_key="RGAPI-4796ab6b-0c85-4369-aa99-be571f8fdba4"
   const id_Url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+userName+'?api_key='+api_key
   const user_url='https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/'+id+'?api_key='+api_key
   const champ_url='https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/'+id+'?api_key='+api_key
