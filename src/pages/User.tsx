@@ -58,8 +58,8 @@ export default function User () {
       <Champion>
         <ChampionTitle>숙련도 TOP5</ChampionTitle>
          {championNames.map((name,index) => (
-            <ChampionIcon>
-            <ChampionImg key={index} src={publicUrl+`/champion_profile/${name}.jpg`} />
+            <ChampionIcon key={name+"Icon"}>
+            <ChampionImg key={name+"Img"} src={publicUrl+`/champion_profile/${name}.jpg`} />
             <ChampionName key={name}>{name}</ChampionName>
             </ChampionIcon>
           ))}
