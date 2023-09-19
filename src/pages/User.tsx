@@ -20,12 +20,10 @@ export default function User () {
         name: string;
         key: string;
       }
-      const [championData, setChampionData] = useState<
-      Record<string, ChampionDataType>
-    >({});
+      const [championData, setChampionData] = useState<Record<string, ChampionDataType>>({});
       
     useEffect(() => {
-        fetch('http://ddragon.leagueoflegends.com/cdn/13.6.1/data/en_US/champion.json')
+        fetch('https://ddragon.leagueoflegends.com/cdn/13.6.1/data/en_US/champion.json')
           .then((response) => response.json())
           .then((data: { data: Record<string, ChampionDataType> }) => {
             const champions = Object.values(data['data']);
