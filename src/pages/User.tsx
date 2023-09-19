@@ -10,7 +10,8 @@ export default function User () {
     const userData=useContext(RiotDataContext)
 
     const publicUrl = process.env.PUBLIC_URL || "";
-    const Tierimg=publicUrl+`/assets/${userData.tier}.png`;
+    const tier=userData.tier.toLowerCase()
+    const Tierimg=publicUrl+`/assets/${tier}.png`;
 
 
     const WinPercentage=Math.round(userData.wins/(userData.wins+userData.losses)*100);
