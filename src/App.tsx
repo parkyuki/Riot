@@ -41,8 +41,6 @@ function App() {
   const [searchClick, setSearchClick] = useState<boolean>(false);
   const [data, setData] = useState<ContextDataType>(initialData);
   const [id, setId] = useState('');
-  const [error, setError] = useState('');
-
 
   const handleUserName=(text:string)=>{
     setUserName(text);
@@ -51,7 +49,7 @@ function App() {
     setSearchClick(click) 
   }
 
-  const api_key="RGAPI-4796ab6b-0c85-4369-aa99-be571f8fdba4"
+  const api_key="RGAPI-6cfc6b70-b6b0-494d-b3ce-691da38c5dba"
   const id_Url='https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+userName+'?api_key='+api_key
   const user_url='https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/'+id+'?api_key='+api_key
   const champ_url='https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/'+id+'?api_key='+api_key
@@ -63,8 +61,7 @@ function App() {
           const res = await axios.get(id_Url);
           setId(res.data.id);
         } catch (error) {
-          setError("API 요청에 실패했습니다.");
-          alert(error); 
+          alert("API 요청에 실패했습니다."); 
         }
       }; 
       idfetchData();
