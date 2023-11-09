@@ -1,6 +1,11 @@
 import React, { useState, createContext } from "react";
 import { GlobalStyles } from "./index";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  createBrowserRouter,
+} from "react-router-dom";
 import Home from "./pages/Home";
 import axios from "axios";
 import User from "./pages/User";
@@ -35,11 +40,17 @@ export const RiotContext = createContext<ContextType>({
 
 export const RiotDataContext = createContext<ContextDataType>(initialData);
 
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/user", element: <User /> },
+]);
+
 function App() {
   const [userName, setUserName] = useState<string>("");
   const [searchClick, setSearchClick] = useState<boolean>(false);
-  const [data, setData] = useState<ContextDataType>(initialData);
   const [id, setId] = useState("");
+
+  const [data, setData] = useState<ContextDataType>(initialData);
 
   const handleUserName = (text: string) => {
     setUserName(text);
@@ -70,6 +81,7 @@ function App() {
   const fetchData = async () => {
     const userRes = await axios.get(user_url);
     const champRes = await axios.get(champ_url);
+    console.log("champRes:" + champRes);
     const { summonerName, tier, rank, leaguePoints, wins, losses } =
       userRes.data[0];
     const championIds = champRes.data
@@ -94,7 +106,7 @@ function App() {
           <div className="App">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/user" element={<User />} loader={fetchData} />
+              <Route path="/user" element={<User />} />
             </Routes>
           </div>
         </BrowserRouter>
